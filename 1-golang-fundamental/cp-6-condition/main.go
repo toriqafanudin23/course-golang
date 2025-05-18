@@ -47,5 +47,37 @@ func main() {
 		}
 	}
 	fmt.Print("Program selesai, I love pemrograman!\n")
-	fmt.Print("Done!")
+	fmt.Print("Done!\n")
+
+	poin := 7
+	switch poin {
+	case 8:
+		{
+			fmt.Println("Poin Anda bagus")
+		}
+	case 7, 6, 5:
+		{
+			fmt.Println("Poin Anda cukup")
+		}
+	default:
+		{
+			fmt.Println("Poin Anda kurang")
+		}
+	}
+
+	switch {
+	case poin >= 8:
+		{
+			fmt.Println("Bagus")
+		}
+		fallthrough
+	case poin < 8 && poin >= 5:
+		{
+			fmt.Println("Cukup")
+		}
+	default:
+		{
+			fmt.Println("Kamu perlu belajar 8 jam sehari")
+		}
+	}
 }

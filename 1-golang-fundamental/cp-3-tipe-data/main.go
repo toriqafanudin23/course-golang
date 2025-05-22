@@ -17,6 +17,8 @@ func main() {
 
 	var exist = true
 	fmt.Printf("exist? %t \n", exist)
+	salah := false
+	fmt.Println(salah)
 
 	var message = "Halooo"
 	fmt.Printf("Faisa, %s", message)

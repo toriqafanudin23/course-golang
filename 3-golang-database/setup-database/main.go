@@ -3,14 +3,18 @@ package main
 import (
 	"database/sql"
 	"fmt"
+	"log"
+	"os"
 	"setup-database/entity"
+
+	"github.com/joho/godotenv"
 
 	// "time"
 
-	// "github.com/joho/godotenv"
-
 	_ "github.com/lib/pq"
 )
+
+var psqlInfo string
 
 // const (
 // 	host     = "localhost"
@@ -20,15 +24,22 @@ import (
 // 	dbname   = "enigmacamp"
 // )
 
-const (
-	host     = "aws-0-ap-southeast-1.pooler.supabase.com"
-	port     = 6543
-	user     = "postgres.abwzragmndkshpeiivjl"
-	password = "F@1sanirbita"
-	dbname   = "postgres"
-)
+func init() {
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal("Error loading .env file")
+	}
 
-var psqlInfo = fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable", host, port, user, password, dbname)
+	// Pindahkan ke sini setelah .env diload
+	host := os.Getenv("DB_HOST")
+	port := os.Getenv("DB_PORT")
+	user := os.Getenv("DB_USER")
+	password := os.Getenv("DB_PASSWORD")
+	dbname := os.Getenv("DB_NAME")
+
+	// Gunakan %s untuk port karena port dari .env adalah string
+	psqlInfo = fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable", host, port, user, password, dbname)
+}
 
 func main() {
 	// student := entity.Student{Id: 5, Name: "Dhiya Rohadatul Aisy", Email: "aisy@gmail.com", Address: "Wonosobo", BirthDate: time.Date(1999, 06, 16, 0, 0, 0, 0, time.Local), Gender: "F"}
@@ -42,6 +53,13 @@ func main() {
 	// }
 	// fmt.Println(getStudentById(2))
 	fmt.Println(students)
+}
+
+func init() {
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal("Error loading .env file")
+	}
 }
 
 func addStudent(student entity.Student) {
